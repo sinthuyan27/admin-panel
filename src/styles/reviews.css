@@ -1,0 +1,11 @@
+.container {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    margin-left: 200px; 
+  
+  }
+.delete-btn{
+  background-color: rgb(5, 5, 147);
+  color: white;
+}  

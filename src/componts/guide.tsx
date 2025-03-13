@@ -31,15 +31,15 @@ const GuideCRUD: React.FC = () => {
   // Handle creating a new guide
   const handleAddGuide = async () => {
     try {
-      // Only send necessary data (don't include _id)
       await axios.post("http://localhost:4000/guide", newGuide);
-      setGuides([...guides, newGuide]); // Add the new guide to the state
-      setShowAddModal(false); // Close the modal
-      setNewGuide({ name: "", experience: 0, languages: [""] }); // Reset the form
+      setGuides([...guides, newGuide]); 
+      setShowAddModal(false);
+      setNewGuide({ name: "", experience: 0, languages: [""] }); 
     } catch (error) {
       console.error("Error adding guide:", error);
     }
   };
+  
 
   return (
     <div className="container">

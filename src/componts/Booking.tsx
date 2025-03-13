@@ -54,8 +54,8 @@ const Book: React.FC = () => {
       try {
         await axios.put(`http://localhost:4000/api/v1/booking/${_id}`, {
           guideId: assignedGuide,
-          status, // Use the status from the form
-          possiblePlaces, // Use possible places if available
+          status, 
+          possiblePlaces,
         });
   
         // Update local state with the new booking details
@@ -89,7 +89,7 @@ const Book: React.FC = () => {
             <th>Guest Size</th>
             <th>Action</th>
             <th>Status</th>
-            {/* <th>Guide</th> */}
+        
           </tr>
         </thead>
         <tbody>
@@ -102,7 +102,7 @@ const Book: React.FC = () => {
               <td>{booking.tourName}</td>
               <td>{booking.guestSize}</td>
               <td>{booking.status}</td>
-              {/* <td>{booking.assignedGuide}</td> */}
+           
               <td>
                 <button className="edit-button" onClick={() => handleEditBooking(booking)}>
                   Edit

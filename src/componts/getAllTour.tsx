@@ -30,10 +30,9 @@ const Tours: React.FC = () => {
     reviews: [],
     featured: false,
   });
-  const [image, setImage] = useState<File | null>(null); // State to store the selected image file
+  const [image, setImage] = useState<File | null>(null); 
 
   useEffect(() => {
-    // Fetch the tours data on initial load
     axios
       .get("http://localhost:4000/api/v1/tours")
       .then((response) => {
@@ -62,12 +61,12 @@ const Tours: React.FC = () => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((response) => {
+      .then((_response) => {
         // Fetch the updated list of tours
         axios
           .get("http://localhost:4000/api/v1/tours")
           .then((response) => {
-            setTours(response.data.data); // Update state with the fetched data
+            setTours(response.data.data); 
           })
           .catch((error) => console.error("Error fetching tours:", error));
 
@@ -84,10 +83,19 @@ const Tours: React.FC = () => {
           reviews: [],
           featured: false,
         });
-        setImage(null); // Reset the image state after successful upload
-        setShowModal(false); // Close the modal after successful add
+        setImage(null);
+        setShowModal(false); 
       })
       .catch((error) => console.error("Error adding tour:", error));
+  };
+
+  const handleDeleteTour = async (id: string) => {
+    try {
+      await axios.delete(`http://localhost:4000/api/v1/tours/${id}`);
+      setTours((prevTours) => prevTours.filter((tour) => tour._id !== id));
+    } catch (error) {
+      console.error("Error deleting tour:", error);
+    }
   };
 
   return (
@@ -116,7 +124,9 @@ const Tours: React.FC = () => {
               <td>{tour.desc}</td>
               <td>{tour.price}</td>
               <td>
-                <button className="delete-button">Hide</button>
+                <button className="delete-button" onClick={() => handleDeleteTour(tour._id)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

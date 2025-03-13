@@ -30,29 +30,23 @@ const Reviews: React.FC = () => {
   };
 
   const handleHideReview = async (reviewId: string) => {
-    // Update reviews state to hide review locally
-    setReviews((prevReviews) => prevReviews.filter((review) => review._id !== reviewId));
-  
     try {
-      // Make API call to delete the review
       const response = await fetch(`http://localhost:4000/api/v1/review/${reviewId}`, {
         method: "DELETE",
       });
   
       if (!response.ok) {
         console.error("Failed to delete review on server:", response.statusText);
-        // You might want to restore the review here if necessary
-        fetchReviews();
-      } else {
-        const data = await response.json();
-        console.log("Review deleted successfully:", data);
+        return;
       }
+  
+      // Remove review from state only if deletion is successful
+      setReviews((prevReviews) => prevReviews.filter((review) => review._id !== reviewId));
     } catch (error) {
       console.error("Error deleting review:", error);
-      // Handle any network issues
-      fetchReviews();
     }
   };
+  
   
 
   return (
